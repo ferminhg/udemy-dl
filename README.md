@@ -4,8 +4,23 @@
 [![GitHub issues](https://img.shields.io/github/issues/r0oth3x49/udemy-dl.svg?style=flat-square)](https://github.com/r0oth3x49/udemy-dl/issues)
 [![GitHub license](https://img.shields.io/github/license/r0oth3x49/udemy-dl.svg?style=flat-square)](https://github.com/r0oth3x49/udemy-dl/blob/master/LICENSE)
 
-# udemy-dl
+# udemy-dl *modified
 **A cross-platform python based utility to download courses from udemy for personal offline use.**
+
+He cambiando el parametro course para que acepte un fichero con url's, ejemplo `courses.txt`
+
+```
+https://udemy.com/course/agile-fundamentals-scrum-kanban-scrumban/learn/lecture/12473356?learning_path_id=78624#overview
+https://udemy.com/course/communicatebrilliantly/learn/lecture/14926752?learning_path_id=78624#overview
+https://udemy.com/course/how-to-speak-up-at-meetings/learn/lecture/2034824?course_portion_id=4340&learning_path_id=78624#overview
+```
+Recomiendo usar con -k cookies.txt o --cache
+
+Ejemplo ejecución
+```
+ python udemy-dl.py courses.txt -k cookie.txt
+```
+
 
 [![udemy-dl-0-5.png](https://s26.postimg.cc/67x3wfak9/udemy-dl-0-5.png)](https://postimg.cc/image/s73ijmred/)
 
