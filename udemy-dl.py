@@ -1455,8 +1455,9 @@ def main():
 
     options = parser.parse_args()
     courses = open(options.course).read().split('\n')
-    options.course = courses[0]
-    download_file(options)
+    for course in courses :
+        options.course = course
+        download_file(options)
 
 if __name__ == '__main__':
     try:
