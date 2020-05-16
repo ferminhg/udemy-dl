@@ -824,125 +824,9 @@ class Udemy(WebVtt2Srt, ProgressBar):
             sys.stdout.write (fc + sd + "[" + fy + sb + "i" + fc + sd + "] : " + fw + sb + "Chapter(s) number or range should be in between ({start} to {end}).\n".format(start=1, end=total_chapters))
             sys.exit(0)
 
-def main():
-    sys.stdout.write(banner())
-    version     = "%(prog)s {version}".format(version=__version__)
-    description = 'A cross-platform python based utility to download courses from udemy for personal offline use.'
-    parser = argparse.ArgumentParser(description=description, conflict_handler="resolve")
-    parser.add_argument('course', help="Udemy course.", type=str)
-    general = parser.add_argument_group("General")
-    general.add_argument(
-        '-h', '--help',\
-        action='help',\
-        help="Shows the help.")
-    general.add_argument(
-        '-v', '--version',\
-        action='version',\
-        version=version,\
-        help="Shows the version.")
 
-    authentication = parser.add_argument_group("Authentication")
-    authentication.add_argument(
-        '-u', '--username',\
-        dest='username',\
-        type=str,\
-        help="Username in udemy.",metavar='')
-    authentication.add_argument(
-        '-p', '--password',\
-        dest='password',\
-        type=str,\
-        help="Password of your account.",metavar='')
-    authentication.add_argument(
-        '-k', '--cookies',\
-        dest='cookies',\
-        type=str,\
-        help="Cookies to authenticate with.",metavar='')
+def download_file(options):
 
-    advance = parser.add_argument_group("Advance")
-    advance.add_argument(
-        '-o', '--output',\
-        dest='output',\
-        type=str,\
-        help="Download to specific directory.",metavar='')
-    advance.add_argument(
-        '-q', '--quality',\
-        dest='quality',\
-        type=int,\
-        help="Download specific video quality.",metavar='')
-    advance.add_argument(
-        '-c', '--chapter',\
-        dest='chapter',\
-        type=int,\
-        help="Download specific chapter from course.",metavar='')
-    advance.add_argument(
-        '-l', '--lecture',\
-        dest='lecture',\
-        type=int,\
-        help="Download specific lecture from chapter(s).",metavar='')
-    advance.add_argument(
-        '-s', '--sub-lang',\
-        dest='language',\
-        type=str,\
-        help="Download specific subtitle/caption (e.g:- en).",metavar='')
-    advance.add_argument(
-        '--chapter-start',\
-        dest='chapter_start',\
-        type=int,\
-        help="Download from specific position within course.",metavar='')
-    advance.add_argument(
-        '--chapter-end',\
-        dest='chapter_end',\
-        type=int,\
-        help="Download till specific position within course.",metavar='')
-    advance.add_argument(
-        '--lecture-start',\
-        dest='lecture_start',\
-        type=int,\
-        help="Download from specific position within chapter(s).",metavar='')
-    advance.add_argument(
-        '--lecture-end',\
-        dest='lecture_end',\
-        type=int,\
-        help="Download till specific position within chapter(s).",metavar='')
-
-    other = parser.add_argument_group("Others")
-    other.add_argument(
-        '--save',\
-        dest='save',\
-        action='store_true',\
-        help="Do not download but save links to a file.")
-    other.add_argument(
-        '--info',\
-        dest='list',\
-        action='store_true',\
-        help="List all lectures with available resolution.")
-    other.add_argument(
-        '--cache',\
-        dest='cache',\
-        action='store_true',\
-        help="Cache your credentials to use it later.")
-    other.add_argument(
-        '--names',\
-        dest='names_only',\
-        action='store_true',\
-        help="Do not download but save lecture names to file.")
-    other.add_argument(
-        '--unsafe',\
-        dest='unsafe',\
-        action='store_true',\
-        help="Download all course with unsafe names.")
-    other.add_argument(
-        '--sub-only',\
-        dest='caption_only',\
-        action='store_true',\
-        help="Download captions/subtitle only.")
-    other.add_argument(
-        '--skip-sub',\
-        dest='skip_captions',\
-        action='store_true',\
-        help="Download course but skip captions/subtitle.")
-
-    options = parser.parse_args()
     if options.names_only:
         options.save = True
 
@@ -1447,6 +1331,132 @@ def main():
                     else:
 
                         udemy.course_download(path=options.output, language=options.language, quality=options.quality, unsafe=options.unsafe)
+
+
+
+def main():
+    sys.stdout.write(banner())
+    version     = "%(prog)s {version}".format(version=__version__)
+    description = 'A cross-platform python based utility to download courses from udemy for personal offline use.'
+    parser = argparse.ArgumentParser(description=description, conflict_handler="resolve")
+    parser.add_argument('course', help="Udemy course.", type=str)
+    general = parser.add_argument_group("General")
+
+    general.add_argument(
+        '-h', '--help',\
+        action='help',\
+        help="Shows the help.")
+    general.add_argument(
+        '-v', '--version',\
+        action='version',\
+        version=version,\
+        help="Shows the version.")
+
+    authentication = parser.add_argument_group("Authentication")
+    authentication.add_argument(
+        '-u', '--username',\
+        dest='username',\
+        type=str,\
+        help="Username in udemy.",metavar='')
+    authentication.add_argument(
+        '-p', '--password',\
+        dest='password',\
+        type=str,\
+        help="Password of your account.",metavar='')
+    authentication.add_argument(
+        '-k', '--cookies',\
+        dest='cookies',\
+        type=str,\
+        help="Cookies to authenticate with.",metavar='')
+
+    advance = parser.add_argument_group("Advance")
+    advance.add_argument(
+        '-o', '--output',\
+        dest='output',\
+        type=str,\
+        help="Download to specific directory.",metavar='')
+    advance.add_argument(
+        '-q', '--quality',\
+        dest='quality',\
+        type=int,\
+        help="Download specific video quality.",metavar='')
+    advance.add_argument(
+        '-c', '--chapter',\
+        dest='chapter',\
+        type=int,\
+        help="Download specific chapter from course.",metavar='')
+    advance.add_argument(
+        '-l', '--lecture',\
+        dest='lecture',\
+        type=int,\
+        help="Download specific lecture from chapter(s).",metavar='')
+    advance.add_argument(
+        '-s', '--sub-lang',\
+        dest='language',\
+        type=str,\
+        help="Download specific subtitle/caption (e.g:- en).",metavar='')
+    advance.add_argument(
+        '--chapter-start',\
+        dest='chapter_start',\
+        type=int,\
+        help="Download from specific position within course.",metavar='')
+    advance.add_argument(
+        '--chapter-end',\
+        dest='chapter_end',\
+        type=int,\
+        help="Download till specific position within course.",metavar='')
+    advance.add_argument(
+        '--lecture-start',\
+        dest='lecture_start',\
+        type=int,\
+        help="Download from specific position within chapter(s).",metavar='')
+    advance.add_argument(
+        '--lecture-end',\
+        dest='lecture_end',\
+        type=int,\
+        help="Download till specific position within chapter(s).",metavar='')
+
+    other = parser.add_argument_group("Others")
+    other.add_argument(
+        '--save',\
+        dest='save',\
+        action='store_true',\
+        help="Do not download but save links to a file.")
+    other.add_argument(
+        '--info',\
+        dest='list',\
+        action='store_true',\
+        help="List all lectures with available resolution.")
+    other.add_argument(
+        '--cache',\
+        dest='cache',\
+        action='store_true',\
+        help="Cache your credentials to use it later.")
+    other.add_argument(
+        '--names',\
+        dest='names_only',\
+        action='store_true',\
+        help="Do not download but save lecture names to file.")
+    other.add_argument(
+        '--unsafe',\
+        dest='unsafe',\
+        action='store_true',\
+        help="Download all course with unsafe names.")
+    other.add_argument(
+        '--sub-only',\
+        dest='caption_only',\
+        action='store_true',\
+        help="Download captions/subtitle only.")
+    other.add_argument(
+        '--skip-sub',\
+        dest='skip_captions',\
+        action='store_true',\
+        help="Download course but skip captions/subtitle.")
+
+    options = parser.parse_args()
+    courses = open(options.course).read().split('\n')
+    options.course = courses[0]
+    download_file(options)
 
 if __name__ == '__main__':
     try:
